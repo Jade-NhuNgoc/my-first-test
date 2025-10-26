@@ -1,0 +1,31 @@
+﻿@model B9_EFCodeFirst.Models.Department
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+
+<h2 style="text-align: center; color: blue;">CHI TIẾT PHÒNG BAN</h2>
+<h4>Mã PB: @Model.DepID</h4>
+<h4>Tên PB: @Model.Name</h4>
+<h4>Số NV: @Model.Employee.Count</h4>
+<br />
+<h2 style="text-align: center; color: blue;">Danh sách nhân viên theo phòng ban</h2>
+<table class="table table-bordered">
+    <tr>
+        <td>Mã NV</td>
+        <td>Họ tên</td>
+        <td>Giới tính</td>
+        <td>Thành phố</td>
+    </tr>
+    @foreach (var item in @ViewBag.emp)
+    {
+        <tr>
+            <th>@item.Id</th>
+            <th>@item.Name</th>
+            <th>@item.Gender</th>
+            <th>@item.City</th>
+        </tr>
+    }
+</table>
+<h5 style="text-decoration: none;"><a href="/Department/Index">Back to Department List</a></h5>

@@ -1,0 +1,26 @@
+﻿@model B9_EFCodeFirst.Models.Employee
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2 class="mb-3">Xác nhận thông tin nhân viên bạn muốn xóa</h2>
+<form action="/Employee/Delete/@Model.Id" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <table>
+        <tr>
+            <th>Mã nhân viên</th>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <th>Tên nhân viên</th>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <th>Phòng ban</th>
+            <td>@Model.Department.Name</td>
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-warning">Xóa</button>
+    <a class="btn btn-primary" href="/Employee/Index">Hủy</a>
+</form>

@@ -1,0 +1,41 @@
+﻿@model B9_EFCodeFirst.Models.Employee
+@{
+    ViewBag.Title = "Insert";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2 class="mb-3">Thêm nhân viên</h2>
+<form action="/Employee/Insert" method="post">
+    <div class="mb-3">
+        <label for="Name" class="form-label">Tên nhân viên</label>
+        <input name="Name" id="Name" type="text" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label for="Gender" class="form-label">Giới tính</label>
+        <select name="Gender" id="Gender" class="form-select" required>
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="City" class="form-label">Quê quán</label>
+        <input name="City" id="City" type="text" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label for="Age" class="form-label">Tuổi</label>
+        <input name="Age" id="Age" type="text" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label for="DepID" class="form-label">Tên phòng ban</label>
+        <select name="DepID" id="DepID" class="form-select" required>
+            <option value="">---Chọn phòng ban---</option>
+            @foreach (var dep in @ViewBag.Department)
+            {
+                <option value="@dep.DepID">@dep.Name</option>
+            }
+        </select>
+    </div>
+    <button class="btn btn-primary">Thêm</button>
+    <a class="btn btn-warning" href="/Employee/Index">Hủy</a>
+</form>
+

@@ -1,0 +1,80 @@
+﻿@model List<B9_EFCodeFirst.Models.Employee>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2 style="text-align: center; color: blue;">Bảng nhân viên</h2>
+<form action="/Employee/Index" method="get" class="d-flex align-items-center mb-3">
+    <label class="me-2">Sắp xếp</label>
+    <select name="SortBy" class="form-select w-auto me-2" onchange="this.form.submit();">
+        <option value="">---- Hãy chọn ----</option>
+        <option value="name" @(ViewBag.SortBy == "name" ? "selected" : "")>Sắp xếp theo tên</option>
+        <option value="gender" @(ViewBag.SortBy == "gender" ? "selected" : "")>Sắp xếp theo giới tính</option>
+        <option value="city" @(ViewBag.SortBy == "city" ? "selected" : "")>Sắp xếp theo quê quán</option>
+        <option value="department" @(ViewBag.SortBy == "department" ? "selected" : "")>Sắp xếp theo phòng ban</option>
+        <option value="age" @(ViewBag.SortBy == "age" ? "selected" : "")>Sắp xếp theo tuổi</option>
+
+    </select>
+</form>
+<table class="table table-bordered">
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Age</td>
+        <td>Gender</td>
+        <td>City</td>
+        <td>Department</td>
+        <td>Options</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.Id</th>
+            <th>@item.Name</th>
+            <th>@item.Age</th>
+            <th>@item.Gender</th>
+            <th>@item.City</th>
+            <th>@item.Department.Name</th>
+            <th>
+                <a href="/Employee/Edit/@item.Id">Sửa thông tin</a> |
+                <a href="/Employee/Delete/@item.Id">Xóa nhân viên</a>
+            </th>
+        </tr>
+    }
+</table>
+<nav aria-label="page">
+    <ul class="pagination">
+        @if (ViewBag.CurrentPage > 1)
+        {
+            {
+                <li class="page-item"><a class="page-link" href="/Employee/Index?SortBy=@ViewBag.SortBy&page=@(ViewBag.CurrentPage-1)">Previous</a></li>
+            }
+        }
+        else
+        {
+            <li class="page-item disabled"><a class="page-link">Previous</a></li>
+        }
+        @for (int i = 1; i <= ViewBag.TotalPage; i++)
+        {
+            if (ViewBag.CurrentPage == i)
+            {
+                <li class="page-item active"><a class="page-link" href="/Employee/Index?SortBy=@ViewBag.SortBy&page=@i">@i</a></li>
+            }
+            else
+            {
+                <li class="page-item"><a class="page-link" href="/Employee/Index?SortBy=@ViewBag.SortBy&page=@i">@i</a></li>
+            }
+        }
+        @if (ViewBag.CurrentPage < ViewBag.TotalPage)
+        {
+            <li class="page-item"><a class="page-link" href="/Employee/Index?SortBy=@ViewBag.SortBy&page=@(ViewBag.CurrentPage+1)">Next</a></li>
+        }
+        else
+        {
+            <li class="page-item disabled"><a class="page-link">Next</a></li>
+
+        }
+    </ul>
+</nav>
+

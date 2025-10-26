@@ -1,0 +1,46 @@
+﻿@model B9_EFCodeFirst.Models.Employee
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2 class="mb-3">Sửa đổi thông tin nhân viên</h2>
+
+<form action="/Employee/Edit/@Model.Id" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div class="mb-3">
+        <label for="Name" class="form-label">Tên nhân viên</label>
+        <input name="Name" id="Name" type="text" class="form-control"
+               value="@Model.Name" />
+    </div>
+    <div class="mb-3">
+        <label for="Gender" class="form-label">Giới tính</label>
+        <select name="Gender" id="Gender" class="form-select" required>
+            <option value="Nam" @(Model.Gender == "Nam" ? "selected" : "")>Nam</option>
+            <option value="Nữ" @(Model.Gender == "Nữ" ? "selected" : "")>Nữ</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="City" class="form-label">Quê quán</label>
+        <input name="City" id="City" type="text" class="form-control"
+               value="@Model.City" />
+    </div>
+    <div class="mb-3">
+        <label for="Age" class="form-label">Tuổi</label>
+        <input name="Age" id="Age" type="text" class="form-control"
+               value="@Model.Age" />
+    </div>
+    <div class="mb-3">
+        <label for="DepID" class="form-label">Tên phòng ban</label>
+        <select name="DepID" id="DepID" class="form-select" required>
+            <option value="">---Chọn phòng ban---</option>
+            @foreach (var dep in @ViewBag.Department)
+            {
+                <option value="@dep.DepID" @(dep.DepID == Model.DepID ? "selected" : "")>@dep.Name</option>
+            }
+        </select>
+    </div>
+    <button class="btn btn-primary">Lưu</button>
+    <a class="btn btn-warning" href="/Employee/Index">Hủy</a>
+</form>
+

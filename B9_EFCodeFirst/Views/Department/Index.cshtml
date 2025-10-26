@@ -1,0 +1,23 @@
+﻿@model List<B9_EFCodeFirst.Models.Department>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2 style="text-align: center; color: blue;">Danh sách phòng ban</h2>
+<table class="table table-bordered">
+    <tr>
+        <td>Mã phòng ban</td>
+        <td>Tên phòng ban</td>
+        <td>Liên kết</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.DepID</th>
+            <th>@item.Name</th>
+            <th><a href="/Department/Detail/@item.DepID">Xem chi tiết</a></th>
+        </tr>
+    }
+</table>
+
